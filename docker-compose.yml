@@ -3,6 +3,7 @@ name: vps-setup
 
 services:
   MTProxy:
+    container_name: MTProxy
     image: ghcr.io/getpagespeed/mtproxy
     ports:
       - "8443:8443"

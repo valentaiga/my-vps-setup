@@ -1,1 +1,18 @@
 
+name: vps-setup
+
+services:
+  MTProxy:
+    image: ghcr.io/getpagespeed/mtproxy
+    ports:
+      - "8443:8443"
+    environment:
+      - SECRET
+      - EXTERNAL_IP
+      - PORT=8443
+      - STATS_PORT=8888
+      - WORKERS=1
+      - RANDOM_PADDING=true
+    volumes:
+      - ~/vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
+

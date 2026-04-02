@@ -19,6 +19,7 @@ services:
       - RANDOM_PADDING=true
     volumes:
       - ~/vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
+    restart: unless-stopped
 
   # https://github.com/hwdsl2/docker-ipsec-vpn-server
 #  ipsec-vpn:

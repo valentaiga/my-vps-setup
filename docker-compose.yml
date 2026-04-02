@@ -8,7 +8,6 @@ services:
     image: ghcr.io/getpagespeed/mtproxy
     ports:
       - "8443:8443"
-    privileged: true
     environment:
       - SECRET
       - EXTERNAL_IP
@@ -45,8 +44,8 @@ services:
     image: kylemanna/openvpn
     ports:
       - "1194:1194/udp"
-    priveleged: true
     cap_add:
       - NET_ADMIN
     volumes:
       - ~/vps-setup-data/ovpn:/etc/openvpn:ro
+    restart: unless-stopped

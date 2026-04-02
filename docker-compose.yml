@@ -21,19 +21,33 @@ services:
       - ~/vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
 
   # https://github.com/hwdsl2/docker-ipsec-vpn-server
-  ipsec-vpn:
-    container_name: ipsec-vpn
-    image: hwdsl2/ipsec-vpn-server
+#  ipsec-vpn:
+#    container_name: ipsec-vpn
+#    image: hwdsl2/ipsec-vpn-server
+#    ports:
+#      - "500:500/udp"
+#      - "4500:4500/udp"
+#    privileged: true
+#    environment:
+#      - VPN_IPSEC_PSK
+#      - VPN_USER
+#      - VPN_PASSWORD
+#      - VPN_PROTECT_CONFIG
+#      - VPN_CLIENT_NAME
+#    volumes:
+#      - ~/vps-setup-data/ipsec-vpn/data:/etc/ipsec.d:rw
+#      - ~/vps-setup-data/ipsec-vpn/modules:/lib/modules:ro
+
+  # https://github.com/kylemanna/docker-openvpn?tab=readme-ov-file
+  ovpn:
+    container_name: ovpn
+    image: kylemanna/openvpn:edge
     ports:
-      - "500:500/udp"
-      - "4500:4500/udp"
-    privileged: true
+      - "1194:1194/udp"
+    priveleged: true
+    cap_add:
+      - NET_ADMIN
     environment:
-      - VPN_IPSEC_PSK
-      - VPN_USER
-      - VPN_PASSWORD
-      - VPN_PROTECT_CONFIG
-      - VPN_CLIENT_NAME
+      - name=value
     volumes:
-      - ~/vps-setup-data/ipsec-vpn/data:/etc/ipsec.d:rw
-      - ~/vps-setup-data/ipsec-vpn/modules:/lib/modules:ro
+      - ~/vps-setup-data/ovpn:/etc/openvpn:ro

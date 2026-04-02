@@ -47,5 +47,5 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - ~/vps-setup-data/ovpn:/etc/openvpn:ro
+      - ~/vps-setup-data/ovpn:/etc/openvpn:rw
     restart: unless-stopped

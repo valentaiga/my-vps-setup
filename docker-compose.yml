@@ -39,15 +39,15 @@ services:
 #      - ~/vps-setup-data/ipsec-vpn/modules:/lib/modules:ro
 
   # https://github.com/kylemanna/docker-openvpn?tab=readme-ov-file
-  ovpn:
-    container_name: ovpn
-    image: kylemanna/openvpn:edge
-    ports:
-      - "1194:1194/udp"
-    priveleged: true
-    cap_add:
-      - NET_ADMIN
-    environment:
-      - name=value
-    volumes:
-      - ~/vps-setup-data/ovpn:/etc/openvpn:ro
+#  ovpn:
+#    container_name: ovpn
+#    image: kylemanna/openvpn:edge
+#    ports:
+#      - "1194:1194/udp"
+#    priveleged: true
+#    cap_add:
+#      - NET_ADMIN
+#    environment:
+#      - name=value
+#    volumes:
+#      - ~/vps-setup-data/ovpn:/etc/openvpn:ro

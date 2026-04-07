@@ -6,13 +6,14 @@ tls:
 
 auth:
   type: password
-  password: "your-strong-password-here"
+  password: "<your password>"
 
 masquerade:
   type: proxy
   proxy:
-    url: https://nginx:8443
-    rewriteHost: false
+    url: "https://nginx:443"
+    rewriteHost: true
+    timeout: 10s
 
 quic:
   initStreamReceiveWindow: 26843545
@@ -21,11 +22,14 @@ quic:
   maxConnReceiveWindow: 67108864
 
 bandwidth:
-  up: 1 gbps
-  down: 1 gbps
+  up: 200 mbps
+  down: 200 mbps
 
 ignoreClientBandwidth: false
 
 disableUDP: false
 
 udpIdleTimeout: 60s
+
+resolver:
+  type: system

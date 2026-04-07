@@ -49,3 +49,14 @@ services:
     volumes:
       - ./vps-setup-data/ovpn:/etc/openvpn:rw
     restart: unless-stopped
+
+  # https://v2.hysteria.network/docs/advanced/Full-Server-Config
+  hysteria:
+    image: tobyxdd/hysteria
+    container_name: hysteria
+    network_mode: "host"
+    volumes:
+      - ./vps-setup-data/hysteria/acme:/acme:rw
+      - ./vps-setup-data/hysteria/hysteria.yaml:/etc/hysteria.yaml:rw
+    command: ["server", "-c", "/etc/hysteria.yaml"]
+    restart: unless-stopped

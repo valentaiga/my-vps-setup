@@ -1,0 +1,53 @@
+listen: 443
+# to generate them use command:
+# openssl req -x509 -newkey rsa:2048 -keyout vps-setup-data/hysteria/acme/server.key -out vps-setup-data/hysteria/acme/server.crt -days 365 -nodes
+tls:
+  cert: /acme/server.crt
+  key: /acme/server.key
+auth:
+  type: password
+  password: <your password>
+disableUDP: false
+udpIdleTimeout: 60s
+quic:
+  initStreamReceiveWindow: 8388608
+  maxStreamReceiveWindow: 8388608
+  initConnReceiveWindow: 20971520
+  maxConnReceiveWindow: 20971520
+  maxIdleTimeout: 30s
+  maxIncomingStreams: 1024
+  disablePathMTUDiscovery: true
+bandwidth:
+  up: 200 mbps
+  down: 200 mbps
+ignoreClientBandwidth: true
+resolver:
+  type: udp
+  tcp:
+    addr: 8.8.8.8:53
+    timeout: 4s
+  udp:
+    addr: 1.1.1.1
+    timeout: 4s
+  tls:
+    addr: 1.1.1.1:853
+    timeout: 10s
+    sni: cloudflare-dns.com
+    insecure: false
+  https:
+    addr: 1.1.1.1:443
+    timeout: 10s
+    sni: cloudflare-dns.com
+    insecure: false   
+outbounds:
+  - name: warp+
+    type: socks5
+    socks5:
+      addr: 127.0.0.1:2000
+masquerade:
+  type: proxy
+  file:
+    dir: /www/masq
+  proxy:
+    url: https://<your domain>
+    rewriteHost: true

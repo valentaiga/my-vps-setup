@@ -54,9 +54,23 @@ services:
   hysteria:
     image: tobyxdd/hysteria
     container_name: hysteria
-    network_mode: "host"
+    ports:
+      - "443:443"
     volumes:
       - ./vps-setup-data/hysteria/acme:/acme:rw
       - ./vps-setup-data/hysteria/hysteria.yaml:/etc/hysteria.yaml:rw
     command: ["server", "-c", "/etc/hysteria.yaml"]
+    restart: unless-stopped
+    depends_on:
+      - nginx
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./vps-setup-data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./vps-setup-data/nginx/html:/usr/share/nginx/html:ro
+      - ./vps-setup-data/hysteria/acme:/etc/nginx/ssl:ro
     restart: unless-stopped

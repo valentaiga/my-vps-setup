@@ -55,20 +55,19 @@ services:
     image: tobyxdd/hysteria
     container_name: hysteria
     ports:
-      - "443:443"
+      - "443:443/udp"
     volumes:
       - ./vps-setup-data/hysteria/acme:/acme:rw
       - ./vps-setup-data/hysteria/hysteria.yaml:/etc/hysteria.yaml:rw
     command: ["server", "-c", "/etc/hysteria.yaml"]
     restart: unless-stopped
-    depends_on:
-      - nginx
 
   nginx:
     image: nginx:latest
     container_name: nginx
     ports:
-      - "80:80"
+      - "443:443/tcp"
+      - "80:80/tcp"
     volumes:
       - ./vps-setup-data/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./vps-setup-data/nginx/html:/usr/share/nginx/html:ro

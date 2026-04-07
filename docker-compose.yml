@@ -17,7 +17,7 @@ services:
       - WORKERS=1
       - RANDOM_PADDING=true
     volumes:
-      - ~/vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
+      - ./vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
     restart: unless-stopped
 
   # https://github.com/hwdsl2/docker-ipsec-vpn-server
@@ -35,8 +35,8 @@ services:
 #      - VPN_PROTECT_CONFIG
 #      - VPN_CLIENT_NAME
 #    volumes:
-#      - ~/vps-setup-data/ipsec-vpn/data:/etc/ipsec.d:rw
-#      - ~/vps-setup-data/ipsec-vpn/modules:/lib/modules:ro
+#      - ./vps-setup-data/ipsec-vpn/data:/etc/ipsec.d:rw
+#      - ./vps-setup-data/ipsec-vpn/modules:/lib/modules:ro
 
   # https://github.com/kylemanna/docker-openvpn?tab=readme-ov-file
   ovpn:
@@ -47,5 +47,5 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - ~/vps-setup-data/ovpn:/etc/openvpn:rw
+      - ./vps-setup-data/ovpn:/etc/openvpn:rw
     restart: unless-stopped

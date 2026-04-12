@@ -21,10 +21,8 @@
 
 ## Dante Socks5
 ### Setup
-1. `nano .env (use env.example)`
-2. change DANTE_USER
-3. change DANTE_PASS
-4. `nano nano vps-setup-data/dante/sockd.conf.example` (save as sockd.conf)
+### Add user
+`docker exec -it dante printf '<password>\<password>\n' | adduser <user>`
 
 ## Hysteria + nginx
 ### Setup

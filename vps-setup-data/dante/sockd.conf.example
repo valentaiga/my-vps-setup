@@ -1,9 +1,0 @@
-{
-  "proxy": {
-    "host": "your-vps-ip",
-    "port": 1080,
-    "type": "socks5",
-    "username": "socks5user",
-    "password": "socks5 pass"
-  }
-}

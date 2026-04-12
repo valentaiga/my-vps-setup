@@ -3,7 +3,8 @@ name: vps-setup
 
 services:
 
-  # https://www.inet.no/dante/
+  # https://github.com/wernight/docker-dante
+  # https://www.inet.no/dante
   dante:
     container_name: dante
     image: wernight/dante
@@ -12,9 +13,6 @@ services:
     volumes:
       - ./vps-setup-data/dante/data:/var/log/dante:rw
       - ./vps-setup-data/dante/sockd.conf:/etc/sockd.conf:ro
-    environment:
-      - DANTE_USER
-      - DANTE_PASS # openssl rand -base64 12
     restart: unless-stopped
 
   # https://github.com/kylemanna/docker-openvpn?tab=readme-ov-file

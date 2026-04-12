@@ -3,22 +3,22 @@ name: vps-setup
 
 services:
   # https://github.com/GetPageSpeed/MTProxy
-  MTProxy:
-    container_name: MTProxy
-    image: ghcr.io/getpagespeed/mtproxy
-    ports:
-      - "8443:8443"
-    environment:
-      - SECRET
-      - EXTERNAL_IP
-      - DIRECT_MODE=true
-      - PORT=8443
-      - STATS_PORT=8888
-      - WORKERS=1
-      - RANDOM_PADDING=true
-    volumes:
-      - ./vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
-    restart: unless-stopped
+#  MTProxy:
+#    container_name: MTProxy
+#    image: ghcr.io/getpagespeed/mtproxy
+#    ports:
+#      - "8443:8443"
+#    environment:
+#      - SECRET
+#      - EXTERNAL_IP
+#      - DIRECT_MODE=true
+#      - PORT=8443
+#      - STATS_PORT=8888
+#      - WORKERS=1
+#      - RANDOM_PADDING=true
+#    volumes:
+#      - ./vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
+#    restart: unless-stopped
 
   # https://github.com/hwdsl2/docker-ipsec-vpn-server
 #  ipsec-vpn:
@@ -37,6 +37,21 @@ services:
 #    volumes:
 #      - ./vps-setup-data/ipsec-vpn/data:/etc/ipsec.d:rw
 #      - ./vps-setup-data/ipsec-vpn/modules:/lib/modules:ro
+
+  dante:
+    container_name: dante
+    image: wernight/dante
+    ports:
+      - "1080:1080"
+    volumes:
+      - ./vps-setup-data/dante/data:/var/log/dante:rw
+      - ./vps-setup-data/dante/sockd.conf:/etc/sockd.conf:ro
+    environment:
+      - DANTE_USER
+      - DANTE_PASS # openssl rand -base64 12
+    networks:
+      - proxy-net
+    restart: unless-stopped
 
   # https://github.com/kylemanna/docker-openvpn?tab=readme-ov-file
   ovpn:

@@ -1,3 +1,4 @@
 .env
 hysteria.yaml
 nginx.conf
+sockd.conf

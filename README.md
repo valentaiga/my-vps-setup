@@ -19,6 +19,13 @@
 3. fill EXTERNAL_IP
 4. `docker compose up -d MTProxy`
 
+## Dante Socks5
+### Setup
+1. `nano .env (use env.example)`
+2. change DANTE_USER
+3. change DANTE_PASS
+4. `nano nano vps-setup-data/dante/sockd.conf.example` (save as sockd.conf)
+
 ## Hysteria + nginx
 ### Setup
 1. `apt update && apt install certbot -y`

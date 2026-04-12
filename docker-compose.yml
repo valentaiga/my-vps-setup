@@ -2,42 +2,8 @@
 name: vps-setup
 
 services:
-  # https://github.com/GetPageSpeed/MTProxy
-#  MTProxy:
-#    container_name: MTProxy
-#    image: ghcr.io/getpagespeed/mtproxy
-#    ports:
-#      - "8443:8443"
-#    environment:
-#      - SECRET
-#      - EXTERNAL_IP
-#      - DIRECT_MODE=true
-#      - PORT=8443
-#      - STATS_PORT=8888
-#      - WORKERS=1
-#      - RANDOM_PADDING=true
-#    volumes:
-#      - ./vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
-#    restart: unless-stopped
 
-  # https://github.com/hwdsl2/docker-ipsec-vpn-server
-#  ipsec-vpn:
-#    container_name: ipsec-vpn
-#    image: hwdsl2/ipsec-vpn-server
-#    ports:
-#      - "500:500/udp"
-#      - "4500:4500/udp"
-#    privileged: true
-#    environment:
-#      - VPN_IPSEC_PSK
-#      - VPN_USER
-#      - VPN_PASSWORD
-#      - VPN_PROTECT_CONFIG
-#      - VPN_CLIENT_NAME
-#    volumes:
-#      - ./vps-setup-data/ipsec-vpn/data:/etc/ipsec.d:rw
-#      - ./vps-setup-data/ipsec-vpn/modules:/lib/modules:ro
-
+  # https://www.inet.no/dante/
   dante:
     container_name: dante
     image: wernight/dante
@@ -49,8 +15,6 @@ services:
     environment:
       - DANTE_USER
       - DANTE_PASS # openssl rand -base64 12
-    networks:
-      - proxy-net
     restart: unless-stopped
 
   # https://github.com/kylemanna/docker-openvpn?tab=readme-ov-file
@@ -88,3 +52,39 @@ services:
       - ./vps-setup-data/nginx/html:/usr/share/nginx/html:ro
       - ./vps-setup-data/hysteria/acme:/etc/nginx/ssl:ro
     restart: unless-stopped
+
+  # https://github.com/GetPageSpeed/MTProxy
+#  MTProxy:
+#    container_name: MTProxy
+#    image: ghcr.io/getpagespeed/mtproxy
+#    ports:
+#      - "8443:8443"
+#    environment:
+#      - SECRET
+#      - EXTERNAL_IP
+#      - DIRECT_MODE=true
+#      - PORT=8443
+#      - STATS_PORT=8888
+#      - WORKERS=1
+#      - RANDOM_PADDING=true
+#    volumes:
+#      - ./vps-setup-data/mtproxy-data:/opt/mtproxy/data:rw
+#    restart: unless-stopped
+
+  # https://github.com/hwdsl2/docker-ipsec-vpn-server
+#  ipsec-vpn:
+#    container_name: ipsec-vpn
+#    image: hwdsl2/ipsec-vpn-server
+#    ports:
+#      - "500:500/udp"
+#      - "4500:4500/udp"
+#    privileged: true
+#    environment:
+#      - VPN_IPSEC_PSK
+#      - VPN_USER
+#      - VPN_PASSWORD
+#      - VPN_PROTECT_CONFIG
+#      - VPN_CLIENT_NAME
+#    volumes:
+#      - ./vps-setup-data/ipsec-vpn/data:/etc/ipsec.d:rw
+#      - ./vps-setup-data/ipsec-vpn/modules:/lib/modules:ro

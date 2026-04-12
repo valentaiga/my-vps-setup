@@ -22,7 +22,7 @@
 ## Dante Socks5
 ### Setup
 ### Add user
-`adduser -D -H -s /sbin/nologin <username> && echo "<username>:<password>" | chpasswd`
+`docker exec -it dante sh -c "adduser -D -H -s /sbin/nologin <username> && echo '<username>:<password>' | chpasswd"`
 
 ## Hysteria + nginx
 ### Setup
